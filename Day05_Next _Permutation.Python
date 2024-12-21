@@ -1,0 +1,46 @@
+class Solution:
+    def nextPermutation(self, arr):
+        n = len(arr)
+        pivot = -1
+
+        # Step 1: Find the pivot (first decreasing element from the end)
+        for i in range(n - 2, -1, -1):
+            if arr[i] < arr[i + 1]:
+                pivot = i
+                break
+        
+        # Step 2: If no pivot is found, reverse the array (last permutation case)
+        if pivot == -1:
+            arr.reverse()
+            return arr
+        
+        # Step 3: Find the smallest element larger than arr[pivot] to the right
+        for i in range(n - 1, pivot, -1):
+            if arr[i] > arr[pivot]:
+                # Step 4: Swap arr[i] and arr[pivot]
+                arr[i], arr[pivot] = arr[pivot], arr[i]
+                break
+        
+        # Step 5: Reverse the portion of the array to the right of the pivot
+        arr[pivot + 1:] = reversed(arr[pivot + 1:])
+        return arr
+
+#{ 
+ # Driver Code Starts
+#Initial Template for Python 3
+
+if __name__ == '__main__':
+    t = int(input())
+    for _ in range(t):
+        arr = input().split()
+        N = len(arr)
+        for i in range(N):
+            arr[i] = int(arr[i])
+
+        ob = Solution()
+        ob.nextPermutation(arr)
+        for i in range(N):
+            print(arr[i], end=" ")
+        print()
+
+# } Driver Code Ends
