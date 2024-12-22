@@ -1,0 +1,31 @@
+class Solution:
+    
+    # Function to find the smallest positive number missing from the array.
+    def missingNumber(self, arr):
+        n = len(arr)
+        
+      
+        j = 0
+        for i in range(n):
+            if arr[i] <= 0:
+                arr[i], arr[j] = arr[j], arr[i]
+                j += 1
+
+        # Step 2: Work only on the positive part
+        positive_arr = arr[j:]
+        m = len(positive_arr)
+        
+        # Step 3: Mark elements within the range [1, m]
+        for i in range(m):
+            val = abs(positive_arr[i])
+            if 1 <= val <= m:
+                if positive_arr[val - 1] > 0:
+                    positive_arr[val - 1] = -positive_arr[val - 1]
+
+        # Step 4: Find the first positive index
+        for i in range(m):
+            if positive_arr[i] > 0:
+                return i + 1
+        
+     
+        return m + 1
