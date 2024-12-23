@@ -1,0 +1,37 @@
+class Solution:
+    def myAtoi(self, s):
+        # Step 1: Skip leading whitespaces
+        i = 0
+        while i < len(s) and s[i] == ' ':
+            i += 1
+
+        # If the string is empty or only contains whitespaces
+        if i == len(s):
+            return 0
+
+        # Step 2: Check for the sign
+        sign = 1
+        if s[i] == '-':
+            sign = -1
+            i += 1
+        elif s[i] == '+':
+            i += 1
+
+        # Step 3: Convert characters to an integer until a non-digit character is encountered
+        num = 0
+        while i < len(s) and s[i].isdigit():
+            num = num * 10 + (ord(s[i]) - ord('0'))  # Convert character to integer
+            i += 1
+
+        # Apply the sign
+        num *= sign
+
+        # Step 4: Clamp the result within the range [-2^31, 2^31 - 1]
+        INT_MAX = 2**31 - 1
+        INT_MIN = -2**31
+        if num > INT_MAX:
+            return INT_MAX
+        if num < INT_MIN:
+            return INT_MIN
+
+        return num
