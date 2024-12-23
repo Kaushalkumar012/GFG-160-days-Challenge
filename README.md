@@ -37,3 +37,4 @@ This repo contains all the Problem solutions of GFG 160 days Challenge with Code
 6. Aggressive Cows - Binary search
 7. Allocate Minimum Pages - Binary Searching - With 2 approaches (1. Two Variables 2. Three Variables)
 8. Kth Missing Positive Number in a Sorted Array - Binary Search
+# Matrix
