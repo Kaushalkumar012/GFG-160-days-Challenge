@@ -1,0 +1,5 @@
+class Solution:
+    def addBinary(self, s1, s2):
+        # Convert binary strings to integers, add them, and convert back to binary
+        result = bin(int(s1, 2) + int(s2, 2))[2:]
+        return result
