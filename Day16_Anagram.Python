@@ -1,0 +1,19 @@
+class Solution:
+    def areAnagrams(self, s1: str, s2: str) -> bool:
+        # Step 1: Check lengths
+        if len(s1) != len(s2):
+            return False
+        
+        # Step 2: Create frequency arrays
+        freq1 = [0] * 26
+        freq2 = [0] * 26
+        
+        # Step 3: Count character frequencies
+        for char in s1:
+            freq1[ord(char) - ord('a')] += 1
+        for char in s2:
+            freq2[ord(char) - ord('a')] += 1
+        
+        # Step 4: Compare frequencies
+        return freq1 == freq2
+
