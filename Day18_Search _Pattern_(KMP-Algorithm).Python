@@ -1,0 +1,14 @@
+class Solution:
+    def search(self, pat, txt):
+        # List to store indices of occurrences
+        indices = []
+        n = len(txt)
+        m = len(pat)
+        
+        # Traverse the string with a sliding window of size m
+        for i in range(n - m + 1):
+            # If substring of txt matches pat, add the index to the list
+            if txt[i:i + m] == pat:
+                indices.append(i)
+        
+        return indices
