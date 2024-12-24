@@ -1,0 +1,25 @@
+class Solution:
+    def minChar(self, s):
+        # Preprocess the string to find the longest palindromic suffix
+        t = s + "#" + s[::-1]
+        lps = [0] * len(t)
+
+        # KMP algorithm to find the longest prefix suffix array
+        i = 0
+        j = 1
+        while j < len(t):
+            if t[i] == t[j]:
+                lps[j] = i + 1
+                i += 1
+                j += 1
+            else:
+                if i != 0:
+                    i = lps[i - 1]
+                else:
+                    j += 1
+
+        # The length of the longest palindromic suffix is the last element of lps
+        longest_palindromic_suffix_len = lps[-1]
+
+        # Calculate the minimum characters to add
+        return len(s) - longest_palindromic_suffix_len
