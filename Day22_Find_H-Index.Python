@@ -1,0 +1,16 @@
+class Solution:
+    # Function to find hIndex
+    def hIndex(self, citations):
+        # Sort the citations in non-decreasing order
+        citations.sort(reverse=True)
+
+        # Iterate over the sorted array to find the H-index
+        h_index = 0
+        for i, citation in enumerate(citations):
+            # Check if the current citation count is greater than or equal to the index + 1
+            if citation >= i + 1:
+                h_index = i + 1
+            else:
+                break
+
+        return h_index
