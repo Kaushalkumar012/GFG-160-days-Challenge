@@ -1,0 +1,52 @@
+class Solution:
+
+    def inversionCount(self, arr):
+
+        def merge_and_count(temp_arr, left, mid, right):
+            i = left  
+            j = mid + 1 
+            k = left    
+            inv_count = 0
+            
+            # Merge the two subarrays
+            while i <= mid and j <= right:
+                if temp_arr[i] <= temp_arr[j]:
+                    arr[k] = temp_arr[i]
+                    i += 1
+                else:
+                    arr[k] = temp_arr[j]
+                    inv_count += (mid - i + 1) 
+                    j += 1
+                k += 1
+            
+            while i <= mid:
+                arr[k] = temp_arr[i]
+                i += 1
+                k += 1
+            
+            # Copy remaining elements of right subarray
+            while j <= right:
+                arr[k] = temp_arr[j]
+                j += 1
+                k += 1
+            
+            # Copy back merged subarray to temp_arr
+            for i in range(left, right + 1):
+                temp_arr[i] = arr[i]
+            
+            return inv_count
+            
+        def merge_sort_and_count(temp_arr, left, right):
+            inv_count = 0
+            if left < right:
+                mid = (left + right) // 2
+
+                inv_count += merge_sort_and_count(temp_arr, left, mid)
+                inv_count += merge_sort_and_count(temp_arr, mid + 1, right)
+                inv_count += merge_and_count(temp_arr, left, mid, right)
+            
+            return inv_count
+        
+        # Create a temporary array to help with merges
+        temp_arr = arr[:]
+        return merge_sort_and_count(temp_arr, 0, len(arr) - 1)
