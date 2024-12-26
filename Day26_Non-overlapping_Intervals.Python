@@ -1,0 +1,16 @@
+class Solution:
+    def minRemoval(self, intervals):
+        intervals.sort(key=lambda x: x[1])
+        
+        # Initialize variables
+        end = float('-inf')  
+        removals = 0  
+        for start, finish in intervals:
+            if start < end:
+                
+                removals += 1
+            else:
+               
+                end = finish
+        
+        return removals
