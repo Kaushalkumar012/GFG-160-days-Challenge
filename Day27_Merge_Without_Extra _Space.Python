@@ -1,0 +1,17 @@
+class Solution:
+    def mergeArrays(self, a, b):
+        n, m = len(a), len(b)
+        i, j = n - 1, 0  # Pointers at the end of `a` and start of `b`
+        
+        # Compare and swap elements to ensure `a` has the smaller n elements
+        while i >= 0 and j < m:
+            if a[i] > b[j]:
+                a[i], b[j] = b[j], a[i]
+            i -= 1
+            j += 1
+        
+        # Sort both arrays to maintain order
+        a.sort()
+        b.sort()
+        
+        return a, b  # Return modified arrays for clarity
