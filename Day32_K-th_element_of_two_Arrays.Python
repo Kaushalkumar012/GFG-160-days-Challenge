@@ -1,0 +1,32 @@
+class Solution:
+    def kthElement(self, a, b, k):
+        
+        if len(a) > len(b):
+            a, b = b, a
+        
+        n, m = len(a), len(b)
+        
+        
+        low, high = max(0, k - m), min(k, n)
+        
+        while low <= high:
+            i = (low + high) // 2
+            j = k - i
+            
+            
+            aLeftMax = float('-inf') if i == 0 else a[i - 1]
+            aRightMin = float('inf') if i == n else a[i]
+            bLeftMax = float('-inf') if j == 0 else b[j - 1]
+            bRightMin = float('inf') if j == m else b[j]
+            
+            
+            if aLeftMax <= bRightMin and bLeftMax <= aRightMin:
+                return max(aLeftMax, bLeftMax)
+            
+            elif aLeftMax > bRightMin:
+                high = i - 1
+            
+            else:
+                low = i + 1
+        
+        return -1  
